@@ -1,0 +1,15 @@
+# No database — stateless calculator, no persistence needed.
+services:
+  # Production-style app container — opt in with:
+  #   docker compose --profile app up -d --build
+  # (dev flow is just `npm run dev`, no compose needed)
+  app:
+    profiles: ["app"]
+    build: .
+    restart: unless-stopped
+    environment:
+      APP_URL: ${APP_URL:-http://localhost:3000}
+      GOOGLE_SITE_VERIFICATION: ${GOOGLE_SITE_VERIFICATION:-}
+      ADSENSE_PUBLISHER_ID: ${ADSENSE_PUBLISHER_ID:-}
+    ports:
+      - "127.0.0.1:30140:3000"
